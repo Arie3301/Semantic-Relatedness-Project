@@ -10,7 +10,7 @@
 # Trigrams: _a_, _b_, _aa, aa_, _ab, ab_, _ba, ba_, _bb, bb_, _aa, aaa, aab, aba, abb, baa, bab, bba, bbb
 # Trigrams lexicographic order: _a_, _aa, _ab, _b_, _ba, _bb, aa_, aaa, aab, ab_, aba, abb, ba_, baa, bab, bb_, bba, bbb
 # Size of vocabulary: 14
-# Number of trigrams over vocabulary: 3 x 2 x 3 = 18 because [#,a,b] * [a,b] * [#,a,b]
+# Number of trigrams over vocabulary: 3 x 2 x 3 = 18 because [_,a,b] * [a,b] * [_,a,b]
 
 # e.g. of an entity in this language
 # Entity name: ab aba abb
@@ -21,8 +21,8 @@
 # Note: 13 out of 14 vocab words are used in this example. We imagine that the word 'b' is an unused entity type.
 
 # declare entity in standardized input format. Goal: represent this information in a vector
-entity1_name = ['ab aba abb'] # entity name is always a list containing 1 string
-entity1_description = ['bb bbb bba'] # entity description is always a list containing 1 string
+entity1_name = ['ab aba abb']  # entity name is always a list containing 1 string
+entity1_description = ['bb bbb bba']  # entity description is always a list containing 1 string
 entity1_connections = ['aa', 'aaa', 'aab']
 entity1_relations = ['ba', 'baa', 'bab']
 entity1_types = ['a']
@@ -142,15 +142,15 @@ def get_vector_representation(entity, trigrams_index, num_trigrams, relations_in
     :return: vector representation of entity
     '''
     name_vec = get_hash_vector(entity[0], trigrams_index, num_trigrams)
-    #print(name_vec)
+    print("name_vec: ", name_vec)
     description_vec = get_hash_vector(entity[1], trigrams_index, num_trigrams)
-    #print(description_vec)
+    print("description_vec: ", description_vec)
     connections_vec = get_hash_vector(entity[2], trigrams_index, num_trigrams)
-    #print(connections_vec)
+    print("connections_vec: ", connections_vec)
     relations_vec = get_onehot_vector(entity[3], relations_index, num_relations)
-    #print(relations_vec)
+    print("relations_vec: ", relations_vec)
     types_vec = get_onehot_vector(entity[4], entitytypes_index, num_entitytypes)
-    #print(types_vec)
+    print("types_vec: ", types_vec)
     return name_vec + description_vec + connections_vec + relations_vec + types_vec
 
 # test:
